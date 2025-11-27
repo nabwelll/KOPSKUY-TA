@@ -5,6 +5,7 @@ import { promoApi } from '../lib/supabase'
 import Header from '../components/Header'
 import './PromoDetail.css'
 
+
 const PromoDetail = () => {
   const { id } = useParams()
   const [promo, setPromo] = useState(null)
