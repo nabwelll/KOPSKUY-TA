@@ -1,9 +1,34 @@
+import { useState, useEffect } from 'react'
 import { FiMapPin, FiPhone, FiMail, FiInstagram, FiClock, FiCoffee, FiHeart, FiUser } from 'react-icons/fi'
 import Header from '../components/Header'
-import founderProfile from '../assets/images/founder-profile.svg'
+import founderProfile from '../assets/images/image.png'
 import './About.css'
 
 const About = () => {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 500)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <main className="about-page">
+          <div className="loading">
+            <div className="loading-spinner"></div>
+          </div>
+        </main>
+      </>
+    )
+  }
+
   return (
     <>
       <Header />
@@ -26,7 +51,7 @@ const About = () => {
             KOPSKUY! adalah kedai kopi yang berdiri sejak 2023 dengan misi menghadirkan 
             kopi berkualitas tinggi dengan harga yang terjangkau untuk semua kalangan. 
             Kami percaya bahwa kenikmatan secangkir kopi yang baik seharusnya bisa 
-            dinikmati oleh semua orang.
+            dinikmati oleh semua orang. 
           </p>
           <p className="about-description">
             Biji kopi kami dipilih langsung dari petani lokal terbaik di Indonesia, 
@@ -107,7 +132,7 @@ const About = () => {
                 <span className="contact-value">+62 895-3200-40207</span>
               </div>
             </a>
-            <a href="mailto:nabilbintang17@gmail.com" className="contact-item">
+            <a href="mailto:nabilbintang17@gmail. com" className="contact-item">
               <div className="contact-icon">
                 <FiMail />
               </div>
