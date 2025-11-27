@@ -1,4 +1,4 @@
-import { FiMapPin, FiPhone, FiMail, FiInstagram, FiClock, FiCoffee, FiHeart } from 'react-icons/fi'
+import { FiMapPin, FiPhone, FiMail, FiInstagram, FiClock, FiCoffee, FiHeart, FiUser } from 'react-icons/fi'
 import Header from '../components/Header'
 import './About.css'
 
@@ -33,6 +33,32 @@ const About = () => {
             kaya dan aromatis. Setiap cangkir adalah dedikasi kami untuk memberikan 
             pengalaman ngopi yang memorable.
           </p>
+        </section>
+
+        {/* Founder Profile */}
+        <section className="about-section">
+          <h2 className="about-section-title">
+            <FiUser /> Tim Pendiri
+          </h2>
+          <div className="founder-card">
+            <div className="founder-avatar">
+              <span className="founder-initials">NBA</span>
+            </div>
+            <div className="founder-info">
+              <h3 className="founder-name">Nabil Bintang Ardiansyah Purwanto</h3>
+              <span className="founder-label">Pendiri KOPSKUY</span>
+              <div className="founder-details">
+                <div className="founder-detail-item">
+                  <span className="founder-detail-label">NIM</span>
+                  <span className="founder-detail-value">21120123140121</span>
+                </div>
+                <div className="founder-detail-item">
+                  <span className="founder-detail-label">Kelompok</span>
+                  <span className="founder-detail-value">01 PrakPPB</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Operating Hours */}
