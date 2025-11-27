@@ -2,9 +2,8 @@ import { createClient } from '@supabase/supabase-js'
 
 // Supabase configuration
 // These are public keys - safe to expose in client-side code
-const supabaseUrl = 'https://nrphyhlwhuwmfrlyrxfy.supabase.co'
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ycGh5aGx3aHV3bWZybHlyeGZ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzNDc4ODcsImV4cCI6MjA2MzkyMzg4N30.Hl8S_dPcT1UTOUbtqxgQDCQ8XzT4p4m3qWBZHO2-6QQ'
-
+const supabaseUrl = 'https://sxxvbbvjorxxbiiaomnh.supabase.co'
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN4eHZiYnZqb3J4eGJpaWFvbW5oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQxNTMxMjEsImV4cCI6MjA3OTcyOTEyMX0.1ebiIxTiiHFssDl1C5gFTN6m4YEP4a7S-MV385cqKiU'
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 // Mock data for fallback when API is unavailable
