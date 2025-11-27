@@ -1,16 +1,82 @@
-# React + Vite
+# KOPSKUY! - Coffee Shop PWA
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Tugas Akhir Praktikum PPB 2025
 
-Currently, two official plugins are available:
+## 📱 Tentang Aplikasi
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+KOPSKUY! adalah Progressive Web App (PWA) untuk aplikasi coffee shop yang memungkinkan pengguna untuk:
+- Melihat menu kopi dan makanan
+- Melihat promo yang tersedia
+- Melihat detail menu dan promo
+- Mendapatkan informasi tentang kedai kopi
 
-## React Compiler
+## 🚀 Fitur
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Progressive Web App (PWA)**: Dapat diinstal di perangkat mobile dan desktop
+- **Bottom Navigation Bar**: Navigasi mudah antar halaman
+- **5+ Halaman**:
+  - Beranda - Tampilan utama dengan menu populer dan promo terbaru
+  - Menu - Daftar lengkap menu dengan filter kategori
+  - Detail Menu - Informasi lengkap tentang menu
+  - Promo - Daftar promo yang tersedia
+  - Detail Promo - Informasi lengkap tentang promo
+  - Tentang - Informasi tentang kedai kopi
 
-## Expanding the ESLint configuration
+## 🛠️ Teknologi
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend**: React + Vite
+- **API**: Supabase
+- **PWA**: vite-plugin-pwa
+- **Routing**: React Router DOM
+- **Icons**: React Icons
+
+## 📦 Instalasi
+
+```bash
+# Clone repository
+git clone https://github.com/nabwelll/KOPSKUY-TA.git
+
+# Masuk ke direktori
+cd KOPSKUY-TA
+
+# Install dependencies
+npm install
+
+# Jalankan development server
+npm run dev
+
+# Build untuk production
+npm run build
+```
+
+## 🗄️ Struktur Database Supabase
+
+### Tabel `menu`
+| Kolom | Tipe | Deskripsi |
+|-------|------|-----------|
+| id | int | Primary key |
+| name | text | Nama menu |
+| category | text | Kategori (Kopi, Non-Kopi, Makanan) |
+| description | text | Deskripsi menu |
+| price | int | Harga dalam Rupiah |
+| image_url | text | URL gambar |
+| is_popular | boolean | Apakah menu populer |
+| ingredients | text | Bahan-bahan |
+| notes | text | Catatan tambahan |
+
+### Tabel `promos`
+| Kolom | Tipe | Deskripsi |
+|-------|------|-----------|
+| id | int | Primary key |
+| title | text | Judul promo |
+| description | text | Deskripsi promo |
+| discount | int | Persentase diskon |
+| image_url | text | URL gambar |
+| valid_until | date | Tanggal berakhir |
+| terms | text | Syarat dan ketentuan |
+| promo_code | text | Kode promo |
+| created_at | timestamp | Waktu dibuat |
+
+## 📄 Lisensi
+
+© 2025 KOPSKUY! All rights reserved.
