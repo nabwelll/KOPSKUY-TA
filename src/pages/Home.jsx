@@ -7,6 +7,7 @@ import MenuCard from '../components/MenuCard'
 import PromoCard from '../components/PromoCard'
 import './Home.css'
 
+
 const Home = () => {
   const [popularMenu, setPopularMenu] = useState([])
   const [latestPromos, setLatestPromos] = useState([])
