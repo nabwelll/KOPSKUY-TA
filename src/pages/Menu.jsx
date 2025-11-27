@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import MenuCard from '../components/MenuCard'
 import './Menu.css'
 
+
 const Menu = () => {
   const [menuItems, setMenuItems] = useState([])
   const [filteredItems, setFilteredItems] = useState([])
