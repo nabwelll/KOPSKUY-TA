@@ -2,6 +2,7 @@
   padding-bottom: 80px;
 }
 
+
 /* Hero Section */
 .about-hero {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
@@ -266,3 +267,5 @@
   font-weight: 500;
   margin: 0;
 }
+
+
