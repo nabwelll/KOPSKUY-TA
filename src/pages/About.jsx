@@ -38,7 +38,7 @@ const About = () => {
         {/* Founder Profile */}
         <section className="about-section">
           <h2 className="about-section-title">
-            <FiUser /> Tim Pendiri
+            <FiUser /> Profil Pendiri
           </h2>
           <div className="founder-card">
             <div className="founder-avatar">
@@ -46,7 +46,7 @@ const About = () => {
             </div>
             <div className="founder-info">
               <h3 className="founder-name">Nabil Bintang Ardiansyah Purwanto</h3>
-              <span className="founder-label">Pendiri KOPSKUY</span>
+              <span className="founder-label">Pendiri KOPSKUY!</span>
               <div className="founder-details">
                 <div className="founder-detail-item">
                   <span className="founder-detail-label">NIM</span>
@@ -84,40 +84,40 @@ const About = () => {
             <FiMapPin /> Hubungi Kami
           </h2>
           <div className="contact-list">
-            <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="contact-item">
+            <a href="https://maps.app.goo.gl/iMCNmkapGnugu8uk7" target="_blank" rel="noopener noreferrer" className="contact-item">
               <div className="contact-icon">
                 <FiMapPin />
               </div>
               <div className="contact-info">
                 <span className="contact-label">Alamat</span>
-                <span className="contact-value">Jl. Kopi Nikmat No. 123, Jakarta Selatan</span>
+                <span className="contact-value">Jl. Gatot Subroto No.121 Ungaran Barat</span>
               </div>
             </a>
-            <a href="tel:+6281234567890" className="contact-item">
+            <a href="tel:+62895320040207" className="contact-item">
               <div className="contact-icon">
                 <FiPhone />
               </div>
               <div className="contact-info">
                 <span className="contact-label">Telepon</span>
-                <span className="contact-value">+62 812-3456-7890</span>
+                <span className="contact-value">+62 895-3200-40207</span>
               </div>
             </a>
-            <a href="mailto:hello@kopskuy.id" className="contact-item">
+            <a href="mailto:nabilbintang17@gmail.com" className="contact-item">
               <div className="contact-icon">
                 <FiMail />
               </div>
               <div className="contact-info">
                 <span className="contact-label">Email</span>
-                <span className="contact-value">hello@kopskuy.id</span>
+                <span className="contact-value">nabilbintang17@gmail.com</span>
               </div>
             </a>
-            <a href="https://instagram.com/kopskuy" target="_blank" rel="noopener noreferrer" className="contact-item">
+            <a href="https://instagram.com/nabilbintangg" target="_blank" rel="noopener noreferrer" className="contact-item">
               <div className="contact-icon">
                 <FiInstagram />
               </div>
               <div className="contact-info">
                 <span className="contact-label">Instagram</span>
-                <span className="contact-value">@kopskuy</span>
+                <span className="contact-value">@nabilbintangg</span>
               </div>
             </a>
           </div>
@@ -127,7 +127,7 @@ const About = () => {
         <section className="about-section app-info">
           <p className="app-version">KOPSKUY! App v1.0.0</p>
           <p className="app-copyright">© 2025 KOPSKUY! All rights reserved.</p>
-          <p className="app-developer">Tugas Akhir Praktikum PPB 2025</p>
+          <p className="app-developer">Tugas Akhir Praktikum PPB 2025 by Nabil</p>
         </section>
       </main>
     </>
