@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 import { FiArrowLeft } from 'react-icons/fi'
 import './Header.css'
+import logo from '../assets/images/logo.png' 
 
 const Header = ({ title, showBack = false }) => {
   const navigate = useNavigate()
@@ -28,6 +29,7 @@ const Header = ({ title, showBack = false }) => {
             <FiArrowLeft />
           </button>
         )}
+        <img src={logo} alt="Logo KOPSKUY!" className="header-logo" />
         <h1 className="header-title">{title || getDefaultTitle()}</h1>
       </div>
     </header>
