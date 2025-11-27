@@ -1,5 +1,6 @@
 import { FiMapPin, FiPhone, FiMail, FiInstagram, FiClock, FiCoffee, FiHeart, FiUser } from 'react-icons/fi'
 import Header from '../components/Header'
+import founderProfile from '../assets/images/founder-profile.svg'
 import './About.css'
 
 const About = () => {
@@ -42,7 +43,11 @@ const About = () => {
           </h2>
           <div className="founder-card">
             <div className="founder-avatar">
-              <span className="founder-initials">NBA</span>
+              <img 
+                src={founderProfile} 
+                alt="Nabil Bintang Ardiansyah Purwanto - Pendiri KOPSKUY" 
+                className="founder-photo"
+              />
             </div>
             <div className="founder-info">
               <h3 className="founder-name">Nabil Bintang Ardiansyah Purwanto</h3>
