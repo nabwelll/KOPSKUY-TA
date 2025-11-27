@@ -83,22 +83,23 @@
 }
 
 .founder-avatar {
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(107, 68, 35, 0.3);
+  box-shadow: 0 4px 16px rgba(107, 68, 35, 0.3);
   border: 4px solid var(--surface-color);
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
 }
 
-.founder-initials {
-  color: white;
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 2px;
+.founder-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .founder-info {
