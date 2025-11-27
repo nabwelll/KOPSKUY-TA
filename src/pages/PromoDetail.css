@@ -1,0 +1,60 @@
+.promo-discount-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.promo-validity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(107, 68, 35, 0.1);
+  color: var(--primary-color);
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.promo-terms {
+  white-space: pre-line;
+}
+
+.promo-code-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--surface-color);
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--primary-color);
+  text-align: center;
+}
+
+.promo-code-label {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.promo-code {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: 2px;
+}
+
+.detail-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

@@ -1,0 +1,176 @@
+.about-page {
+  padding-bottom: 80px;
+}
+
+/* Hero Section */
+.about-hero {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  padding: 40px 20px;
+  text-align: center;
+  color: white;
+}
+
+.about-logo {
+  width: 80px;
+  height: 80px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.about-logo svg {
+  font-size: 40px;
+}
+
+.about-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.about-tagline {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* Sections */
+.about-section {
+  padding: 24px 16px;
+  border-bottom: 1px solid rgba(107, 68, 35, 0.1);
+}
+
+.about-section:last-child {
+  border-bottom: none;
+}
+
+.about-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0 0 16px 0;
+}
+
+.about-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0 0 12px 0;
+}
+
+.about-description:last-child {
+  margin-bottom: 0;
+}
+
+/* Operating Hours */
+.hours-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hours-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: var(--surface-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.hours-day {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.hours-time {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Contact List */
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background-color: var(--surface-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.contact-item:hover {
+  transform: translateX(4px);
+}
+
+.contact-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(107, 68, 35, 0.1);
+  border-radius: 50%;
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.contact-icon svg {
+  font-size: 20px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contact-label {
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+.contact-value {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* App Info */
+.app-info {
+  text-align: center;
+  padding-top: 32px;
+}
+
+.app-version {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin: 0 0 4px 0;
+}
+
+.app-copyright {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin: 0 0 4px 0;
+}
+
+.app-developer {
+  font-size: 0.85rem;
+  color: var(--primary-color);
+  font-weight: 500;
+  margin: 0;
+}
