@@ -5,6 +5,7 @@ import { menuApi } from '../lib/supabase'
 import Header from '../components/Header'
 import './MenuDetail.css'
 
+
 const MenuDetail = () => {
   const { id } = useParams()
   const [menuItem, setMenuItem] = useState(null)
