@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import PromoCard from '../components/PromoCard'
 import './Promo.css'
 
+
 const Promo = () => {
   const [promos, setPromos] = useState([])
   const [loading, setLoading] = useState(true)
