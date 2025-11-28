@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiClock, FiPercent } from 'react-icons/fi'
 import './PromoCard.css'
 
 const PromoCard = ({ promo }) => {
+  const [imageLoaded, setImageLoaded] = useState(false)
+
   // Format date
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('id-ID', {
@@ -18,8 +21,9 @@ const PromoCard = ({ promo }) => {
         <img
           src={promo.image_url || 'https://placehold.co/400x200/6B4423/FDF6E3?text=Promo'}
           alt={promo.title}
-          className="promo-card-image"
+          className={`promo-card-image ${imageLoaded ? 'loaded' : ''}`}
           loading="lazy"
+          onLoad={() => setImageLoaded(true)}
         />
         <div className="promo-card-discount">
           <FiPercent />

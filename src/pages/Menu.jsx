@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { FiSearch, FiX } from 'react-icons/fi'
 import { menuApi } from '../lib/supabase'
 import Header from '../components/Header'
 import MenuCard from '../components/MenuCard'
@@ -10,6 +11,7 @@ const Menu = () => {
   const [filteredItems, setFilteredItems] = useState([])
   const [categories, setCategories] = useState([])
   const [activeCategory, setActiveCategory] = useState('Semua')
+  const [searchQuery, setSearchQuery] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
@@ -35,13 +37,37 @@ const Menu = () => {
     fetchMenu()
   }, [])
 
+  useEffect(() => {
+    // Filter items based on category and search query
+    let results = menuItems
+
+    // Apply category filter
+    if (activeCategory !== 'Semua') {
+      results = results.filter(item => item.category === activeCategory)
+    }
+
+    // Apply search filter
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase()
+      results = results.filter(item => 
+        item.name.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query)
+      )
+    }
+
+    setFilteredItems(results)
+  }, [menuItems, activeCategory, searchQuery])
+
   const handleCategoryFilter = (category) => {
     setActiveCategory(category)
-    if (category === 'Semua') {
-      setFilteredItems(menuItems)
-    } else {
-      setFilteredItems(menuItems.filter(item => item.category === category))
-    }
+  }
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value)
+  }
+
+  const clearSearch = () => {
+    setSearchQuery('')
   }
 
   if (loading) {
@@ -72,6 +98,25 @@ const Menu = () => {
     <>
       <Header />
       <main className="menu-page">
+        {/* Search Bar */}
+        <div className="search-container">
+          <div className="search-bar">
+            <FiSearch className="search-icon" />
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Cari menu favorit kamu..."
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
+            {searchQuery && (
+              <button className="search-clear" onClick={clearSearch}>
+                <FiX />
+              </button>
+            )}
+          </div>
+        </div>
+
         {/* Category Filter */}
         <div className="category-filter">
           {categories.map((category) => (
@@ -95,7 +140,7 @@ const Menu = () => {
             </div>
           ) : (
             <div className="empty-state">
-              <p>Tidak ada menu dalam kategori ini.</p>
+              <p>{searchQuery ? 'Tidak ada hasil untuk pencarian "' + searchQuery + '"' : 'Tidak ada menu dalam kategori ini.'}</p>
             </div>
           )}
         </div>

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { FiStar, FiCoffee } from 'react-icons/fi'
+import { FiStar, FiCoffee, FiShoppingCart, FiCheck } from 'react-icons/fi'
 import { menuApi } from '../lib/supabase'
 import Header from '../components/Header'
+import { addToCart, formatPrice } from '../utils/cartUtils'
 import './MenuDetail.css'
 
 
@@ -11,6 +12,7 @@ const MenuDetail = () => {
   const [menuItem, setMenuItem] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [addedToCart, setAddedToCart] = useState(false)
 
   useEffect(() => {
     const fetchMenuItem = async () => {
@@ -29,13 +31,19 @@ const MenuDetail = () => {
     fetchMenuItem()
   }, [id])
 
-  // Format price to Indonesian Rupiah
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-      minimumFractionDigits: 0,
-    }).format(price)
+  const handleAddToCart = () => {
+    if (menuItem) {
+      addToCart(menuItem)
+      setAddedToCart(true)
+      
+      // Dispatch custom event to update cart count in BottomNav
+      window.dispatchEvent(new Event('cartUpdated'))
+      
+      // Reset button after 2 seconds
+      setTimeout(() => {
+        setAddedToCart(false)
+      }, 2000)
+    }
   }
 
   if (loading) {
@@ -66,25 +74,33 @@ const MenuDetail = () => {
     <>
       <Header title="Detail Menu" showBack />
       <main className="detail-page">
-        <div className="detail-image-wrapper">
-          <img
-            src={menuItem.image_url || 'https://placehold.co/600x400/6B4423/FDF6E3?text=Kopi'}
-            alt={menuItem.name}
-            className="detail-image"
-          />
+        <div className="detail-hero">
+          <div className="detail-image-wrapper">
+            <img
+              src={menuItem.image_url || 'https://placehold.co/600x400/6B4423/FDF6E3?text=Kopi'}
+              alt={menuItem.name}
+              className="detail-image"
+              loading="lazy"
+            />
+            <div className="detail-image-overlay"></div>
+          </div>
           {menuItem.is_popular && (
-            <span className="detail-badge">
+            <span className="detail-badge popular">
               <FiStar /> Menu Populer
             </span>
           )}
-        </div>
-
-        <div className="detail-content">
-          <span className="detail-category">
+          <span className="detail-category-badge">
             <FiCoffee /> {menuItem.category}
           </span>
-          <h1 className="detail-title">{menuItem.name}</h1>
-          <p className="detail-price">{formatPrice(menuItem.price)}</p>
+        </div>
+
+        <div className="detail-card">
+          <div className="detail-header">
+            <h1 className="detail-title">{menuItem.name}</h1>
+            <p className="detail-price">{formatPrice(menuItem.price)}</p>
+          </div>
+          
+          <div className="detail-divider"></div>
           
           <div className="detail-section">
             <h2 className="detail-section-title">Deskripsi</h2>
@@ -105,6 +121,25 @@ const MenuDetail = () => {
             </div>
           )}
         </div>
+
+        {/* Add to Cart Button */}
+        <button 
+          className={`add-to-cart-btn ${addedToCart ? 'added' : ''}`}
+          onClick={handleAddToCart}
+          disabled={addedToCart}
+        >
+          {addedToCart ? (
+            <>
+              <FiCheck className="btn-icon" />
+              <span>Ditambahkan ke Keranjang</span>
+            </>
+          ) : (
+            <>
+              <FiShoppingCart className="btn-icon" />
+              <span>Tambah ke Keranjang</span>
+            </>
+          )}
+        </button>
       </main>
     </>
   )

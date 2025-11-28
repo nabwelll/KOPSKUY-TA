@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiStar } from 'react-icons/fi'
 import './MenuCard.css'
 
 const MenuCard = ({ item }) => {
+  const [imageLoaded, setImageLoaded] = useState(false)
+
   // Format price to Indonesian Rupiah
   const formatPrice = (price) => {
     return new Intl.NumberFormat('id-ID', {
@@ -18,8 +21,9 @@ const MenuCard = ({ item }) => {
         <img
           src={item.image_url || 'https://placehold.co/300x200/6B4423/FDF6E3?text=Kopi'}
           alt={item.name}
-          className="menu-card-image"
+          className={`menu-card-image ${imageLoaded ? 'loaded' : ''}`}
           loading="lazy"
+          onLoad={() => setImageLoaded(true)}
         />
         {item.is_popular && (
           <span className="menu-card-badge">
