@@ -2,12 +2,10 @@ import { NavLink } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { FiHome, FiCoffee, FiTag, FiUser, FiShoppingCart } from 'react-icons/fi'
 import { getCartCount } from '../utils/cartUtils'
-import useDisplayMode from '../hooks/useDisplayMode'
 import './BottomNav.css'
 
 const BottomNav = () => {
   const [cartCount, setCartCount] = useState(0)
-  const { isStandalone, displayMode } = useDisplayMode()
 
   useEffect(() => {
     // Update cart count on mount and when localStorage changes
@@ -38,7 +36,7 @@ const BottomNav = () => {
   ]
 
   return (
-    <nav className={`bottom-nav ${isStandalone ? 'standalone-mode' : 'browser-mode'}`} data-display-mode={displayMode}>
+    <nav className="bottom-nav">
       {navItems.map((item) => (
         <NavLink
           key={item.to}
