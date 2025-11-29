@@ -1,18 +1,24 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { FiCoffee, FiTag, FiArrowRight } from 'react-icons/fi'
 import { menuApi, promoApi } from '../lib/supabase'
 import Header from '../components/Header'
 import MenuCard from '../components/MenuCard'
 import PromoCard from '../components/PromoCard'
+import SplashScreen from '../components/SplashScreen'
 import './Home.css'
 
+const SPLASH_SHOWN_KEY = 'kopskuy_splash_shown'
 
 const Home = () => {
   const [popularMenu, setPopularMenu] = useState([])
   const [latestPromos, setLatestPromos] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [showSplash, setShowSplash] = useState(() => {
+    // Only show splash on first visit in this session
+    return !sessionStorage.getItem(SPLASH_SHOWN_KEY)
+  })
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +45,16 @@ const Home = () => {
 
     fetchData()
   }, [])
+
+  const handleSplashComplete = useCallback(() => {
+    sessionStorage.setItem(SPLASH_SHOWN_KEY, 'true')
+    setShowSplash(false)
+  }, [])
+
+  // Show splash screen first
+  if (showSplash) {
+    return <SplashScreen onComplete={handleSplashComplete} />
+  }
 
   if (loading) {
     return (

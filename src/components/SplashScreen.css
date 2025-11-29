@@ -1,0 +1,228 @@
+.splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 50%, #2C1810 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.splash-screen.fade-out {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+.splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: splashFadeIn 0.8s ease-out forwards;
+}
+
+@keyframes splashFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.splash-logo-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.splash-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.3));
+  animation: logoPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Steam Animation */
+.splash-steam {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.steam {
+  width: 8px;
+  height: 30px;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.6), transparent);
+  border-radius: 4px;
+  animation: steamRise 2s ease-in-out infinite;
+  opacity: 0;
+}
+
+.steam-1 {
+  animation-delay: 0s;
+}
+
+.steam-2 {
+  animation-delay: 0.5s;
+  height: 35px;
+}
+
+.steam-3 {
+  animation-delay: 1s;
+}
+
+@keyframes steamRise {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scaleY(0.5);
+  }
+  30% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px) scaleY(1);
+  }
+}
+
+.splash-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  margin: 8px 0 0;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  animation: titleSlide 0.8s ease-out 0.3s both;
+}
+
+@keyframes titleSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.splash-tagline {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 1px;
+  animation: taglineSlide 0.8s ease-out 0.5s both;
+}
+
+@keyframes taglineSlide {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.splash-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  animation: loaderFadeIn 0.5s ease-out 0.8s both;
+}
+
+@keyframes loaderFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.splash-coffee-icon {
+  font-size: 28px;
+  color: var(--secondary-color);
+  animation: coffeeRotate 1.5s ease-in-out infinite;
+}
+
+@keyframes coffeeRotate {
+  0%, 100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+.splash-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--secondary-color);
+  border-radius: 50%;
+  animation: dotBounce 1.4s ease-in-out infinite;
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dotBounce {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
