@@ -39,11 +39,15 @@ const Cart = () => {
   const handleQuantityChange = (itemId, newQuantity) => {
     const updatedCart = updateQuantity(itemId, newQuantity)
     setCartItems(updatedCart)
+    window.dispatchEvent(new Event('cartUpdated')) 
+
   }
 
   const handleRemoveItem = (itemId) => {
     const updatedCart = removeFromCart(itemId)
     setCartItems(updatedCart)
+    window. dispatchEvent(new Event('cartUpdated')) 
+
   }
 
   const handleInputChange = (e) => {
@@ -75,6 +79,7 @@ const Cart = () => {
     return Object.keys(newErrors).length === 0
   }
 
+  
   // Apply promo code
   const handleApplyPromo = async () => {
     if (!promoCode.trim()) {
@@ -133,6 +138,7 @@ const Cart = () => {
   }
 
   const handleBackToHome = () => {
+    window.dispatchEvent(new Event('cartUpdated')) // ✅ Tambahkan ini
     navigate('/')
   }
 
