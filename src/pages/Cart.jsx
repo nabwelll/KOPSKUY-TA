@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { FiPlus, FiMinus, FiTrash2, FiCreditCard, FiSmartphone, FiDollarSign, FiShoppingBag, FiCheck } from 'react-icons/fi'
+import { FiPlus, FiMinus, FiTrash2, FiCreditCard, FiSmartphone, FiDollarSign, FiShoppingBag, FiCheck, FiTag, FiX, FiLoader } from 'react-icons/fi'
 import Header from '../components/Header'
 import LoadingScreen from '../components/LoadingScreen'
 import { getCart, updateQuantity, removeFromCart, clearCart, getCartTotal, formatPrice } from '../utils/cartUtils'
+import { promoApi } from '../lib/supabase'
 import './Cart.css'
 
 const Cart = () => {
@@ -16,9 +17,15 @@ const Cart = () => {
   const [customerInfo, setCustomerInfo] = useState({
     name: '',
     phone: '',
-    address: ''
+    tableNumber: ''
   })
   const [errors, setErrors] = useState({})
+  
+  // Promo code state
+  const [promoCode, setPromoCode] = useState('')
+  const [appliedPromo, setAppliedPromo] = useState(null)
+  const [promoError, setPromoError] = useState('')
+  const [promoLoading, setPromoLoading] = useState(false)
 
   useEffect(() => {
     // Simulate loading
@@ -58,14 +65,58 @@ const Cart = () => {
     } else if (!/^[0-9]{10,13}$/.test(customerInfo.phone.replace(/\s/g, ''))) {
       newErrors.phone = 'Nomor telepon tidak valid'
     }
-    if (!customerInfo.address.trim()) {
-      newErrors.address = 'Alamat wajib diisi'
+    if (!customerInfo.tableNumber.trim()) {
+      newErrors.tableNumber = 'Nomor meja wajib diisi'
     }
     if (!paymentMethod) {
       newErrors.payment = 'Pilih metode pembayaran'
     }
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
+  }
+
+  // Apply promo code
+  const handleApplyPromo = async () => {
+    if (!promoCode.trim()) {
+      setPromoError('Masukkan kode promo')
+      return
+    }
+
+    setPromoLoading(true)
+    setPromoError('')
+
+    try {
+      const promo = await promoApi.validatePromoCode(promoCode.trim())
+      if (promo) {
+        setAppliedPromo(promo)
+        setPromoCode('')
+        setPromoError('')
+      } else {
+        setPromoError('Kode promo tidak valid atau sudah kadaluarsa')
+      }
+    } catch {
+      setPromoError('Gagal memvalidasi kode promo')
+    } finally {
+      setPromoLoading(false)
+    }
+  }
+
+  // Remove applied promo
+  const handleRemovePromo = () => {
+    setAppliedPromo(null)
+    setPromoCode('')
+    setPromoError('')
+  }
+
+  // Calculate discount amount
+  const getDiscountAmount = () => {
+    if (!appliedPromo) return 0
+    return Math.round((getCartTotal() * appliedPromo.discount) / 100)
+  }
+
+  // Calculate final total
+  const getFinalTotal = () => {
+    return getCartTotal() - getDiscountAmount()
   }
 
   const handleCheckout = async () => {
@@ -113,7 +164,7 @@ const Cart = () => {
             </p>
             <div className="confirmation-details">
               <p><strong>Metode Pembayaran:</strong> {paymentMethods.find(p => p.id === paymentMethod)?.label}</p>
-              <p><strong>Alamat:</strong> {customerInfo.address}</p>
+              <p><strong>Nomor Meja:</strong> {customerInfo.tableNumber}</p>
             </div>
             <button className="btn-primary" onClick={handleBackToHome}>
               Kembali ke Beranda
@@ -188,10 +239,63 @@ const Cart = () => {
                 <span>Total Item</span>
                 <span>{cartItems.reduce((sum, item) => sum + item.quantity, 0)} item</span>
               </div>
-              <div className="summary-row total">
-                <span>Total Harga</span>
+              <div className="summary-row">
+                <span>Subtotal</span>
                 <span>{formatPrice(getCartTotal())}</span>
               </div>
+              {appliedPromo && (
+                <div className="summary-row discount">
+                  <span>Potongan Promo ({appliedPromo.discount}%)</span>
+                  <span>-{formatPrice(getDiscountAmount())}</span>
+                </div>
+              )}
+              <div className="summary-row total">
+                <span>Total Harga</span>
+                <span>{formatPrice(getFinalTotal())}</span>
+              </div>
+            </div>
+
+            {/* Promo Code Section */}
+            <div className="promo-section">
+              <h3 className="section-title">
+                <FiTag /> Kode Promo
+              </h3>
+              {appliedPromo ? (
+                <div className="applied-promo">
+                  <div className="applied-promo-info">
+                    <FiCheck className="promo-success-icon" />
+                    <div className="applied-promo-details">
+                      <span className="applied-promo-code">{appliedPromo.promo_code}</span>
+                      <span className="applied-promo-discount">Diskon {appliedPromo.discount}%</span>
+                    </div>
+                  </div>
+                  <button className="remove-promo-btn" onClick={handleRemovePromo}>
+                    <FiX />
+                  </button>
+                </div>
+              ) : (
+                <div className="promo-input-wrapper">
+                  <input
+                    type="text"
+                    value={promoCode}
+                    onChange={(e) => {
+                      setPromoCode(e.target.value.toUpperCase())
+                      if (promoError) setPromoError('')
+                    }}
+                    placeholder="Masukkan kode promo"
+                    className={promoError ? 'error' : ''}
+                    disabled={promoLoading}
+                  />
+                  <button 
+                    className="apply-promo-btn"
+                    onClick={handleApplyPromo}
+                    disabled={promoLoading}
+                  >
+                    {promoLoading ? <FiLoader className="spin" /> : 'Terapkan'}
+                  </button>
+                </div>
+              )}
+              {promoError && <p className="error-text">{promoError}</p>}
             </div>
 
             {/* Payment Method */}
@@ -245,23 +349,23 @@ const Cart = () => {
                 {errors.phone && <p className="error-text">{errors.phone}</p>}
               </div>
               <div className="form-group">
-                <label htmlFor="address">Alamat Pengiriman</label>
-                <textarea
-                  id="address"
-                  name="address"
-                  value={customerInfo.address}
+                <label htmlFor="tableNumber">Nomor Meja</label>
+                <input
+                  type="text"
+                  id="tableNumber"
+                  name="tableNumber"
+                  value={customerInfo.tableNumber}
                   onChange={handleInputChange}
-                  placeholder="Masukkan alamat lengkap Anda"
-                  rows="3"
-                  className={errors.address ? 'error' : ''}
+                  placeholder="Contoh: 12"
+                  className={errors.tableNumber ? 'error' : ''}
                 />
-                {errors.address && <p className="error-text">{errors.address}</p>}
+                {errors.tableNumber && <p className="error-text">{errors.tableNumber}</p>}
               </div>
             </div>
 
             {/* Checkout Button */}
             <button className="checkout-btn" onClick={handleCheckout}>
-              Checkout - {formatPrice(getCartTotal())}
+              Checkout - {formatPrice(getFinalTotal())}
             </button>
           </>
         )}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { FiClock, FiPercent, FiInfo } from 'react-icons/fi'
+import { FiClock, FiPercent, FiInfo, FiCopy, FiCheck } from 'react-icons/fi'
 import { promoApi } from '../lib/supabase'
 import Header from '../components/Header'
 import './PromoDetail.css'
@@ -11,6 +11,7 @@ const PromoDetail = () => {
   const [promo, setPromo] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     const fetchPromo = async () => {
@@ -37,6 +38,19 @@ const PromoDetail = () => {
       month: 'long',
       year: 'numeric',
     })
+  }
+
+  // Copy promo code to clipboard
+  const handleCopyCode = async () => {
+    if (promo?.promo_code) {
+      try {
+        await navigator.clipboard.writeText(promo.promo_code)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      } catch (err) {
+        console.error('Failed to copy code:', err)
+      }
+    }
   }
 
   if (loading) {
@@ -104,7 +118,22 @@ const PromoDetail = () => {
           {promo.promo_code && (
             <div className="promo-code-section">
               <span className="promo-code-label">Kode Promo:</span>
-              <span className="promo-code">{promo.promo_code}</span>
+              <div className="promo-code-wrapper">
+                <span className="promo-code">{promo.promo_code}</span>
+                <button 
+                  className={`copy-code-btn ${copied ? 'copied' : ''}`}
+                  onClick={handleCopyCode}
+                  aria-label={copied ? 'Kode berhasil disalin' : 'Salin kode promo'}
+                >
+                  {copied ? <FiCheck /> : <FiCopy />}
+                  <span>{copied ? 'Tersalin!' : 'Salin Kode'}</span>
+                </button>
+              </div>
+              {copied && (
+                <div className="copy-toast">
+                  <FiCheck /> Kode promo berhasil disalin!
+                </div>
+              )}
             </div>
           )}
         </div>

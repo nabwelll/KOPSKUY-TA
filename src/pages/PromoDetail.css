@@ -1,4 +1,5 @@
 
+/* Discount Badge with animation */
 .promo-discount-badge {
   position: absolute;
   top: 16px;
@@ -6,56 +7,229 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
-  color: white;
-  padding: 10px 20px;
+  background: linear-gradient(135deg, #D4AF37 0%, #F4E3B5 50%, #D4AF37 100%);
+  color: #6B4423;
+  padding: 12px 24px;
   border-radius: 25px;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 700;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  animation: pulse 2s infinite;
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+  }
+}
+
+.promo-discount-badge svg {
+  font-size: 1.1rem;
+}
+
+/* Validity section */
 .promo-validity {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background-color: rgba(107, 68, 35, 0.1);
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(107, 68, 35, 0.1) 0%, rgba(139, 90, 60, 0.1) 100%);
   color: var(--primary-color);
-  padding: 12px 16px;
+  padding: 14px 18px;
   border-radius: var(--radius);
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 24px;
+  border-left: 4px solid var(--primary-color);
+  box-shadow: 0 2px 8px rgba(107, 68, 35, 0.1);
+}
+
+.promo-validity svg {
+  font-size: 1.2rem;
 }
 
 .promo-terms {
   white-space: pre-line;
 }
 
+/* Promo Code Section */
 .promo-code-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  background-color: var(--surface-color);
-  padding: 20px;
+  gap: 12px;
+  background: linear-gradient(135deg, #FDF6E3 0%, #FFF8DC 100%);
+  padding: 24px;
   border-radius: var(--radius-lg);
   border: 2px dashed var(--primary-color);
   text-align: center;
+  margin-top: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(107, 68, 35, 0.15);
+}
+
+.promo-code-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(107, 68, 35, 0.03) 10px,
+    rgba(107, 68, 35, 0.03) 20px
+  );
+  pointer-events: none;
 }
 
 .promo-code-label {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--text-light);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+.promo-code-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
 }
 
 .promo-code {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.6rem;
+  font-weight: 800;
   color: var(--primary-color);
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, #6B4423 0%, #8B5A3C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 2px solid rgba(107, 68, 35, 0.2);
+  background-color: rgba(255, 255, 255, 0.8);
+  -webkit-text-fill-color: #6B4423;
 }
 
-.detail-section-title {
+.copy-code-btn {
   display: flex;
   align-items: center;
   gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #6B4423 0%, #8B5A3C 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(107, 68, 35, 0.3);
+}
+
+.copy-code-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(107, 68, 35, 0.4);
+}
+
+.copy-code-btn:active {
+  transform: translateY(0);
+}
+
+.copy-code-btn.copied {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.copy-code-btn svg {
+  font-size: 1.1rem;
+}
+
+/* Copy Toast Notification */
+.copy-toast {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  animation: slideUp 0.3s ease, fadeOut 0.3s ease 1.7s forwards;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+  z-index: 10;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Section Title Enhancement */
+.detail-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(107, 68, 35, 0.1);
+}
+
+.detail-section-title svg {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
+/* Responsive adjustments */
+@media (min-width: 576px) {
+  .promo-code-wrapper {
+    flex-direction: row;
+    gap: 16px;
+  }
+  
+  .promo-code {
+    font-size: 1.8rem;
+  }
+  
+  .promo-discount-badge {
+    font-size: 1.3rem;
+    padding: 14px 28px;
+  }
 }
