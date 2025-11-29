@@ -94,7 +94,8 @@ const Cart = () => {
       } else {
         setPromoError('Kode promo tidak valid atau sudah kadaluarsa')
       }
-    } catch {
+    } catch (err) {
+      console.error('Failed to validate promo code:', err)
       setPromoError('Gagal memvalidasi kode promo')
     } finally {
       setPromoLoading(false)

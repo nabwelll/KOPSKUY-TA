@@ -304,9 +304,9 @@ export const promoApi = {
       
       if (error) throw error
       return data
-    } catch {
+    } catch (err) {
       // Fallback to mock data for validation
-      console.log('Using mock promo data for validation:', code)
+      console.log('Using mock promo data for validation:', code, err)
       const today = new Date().toISOString().split('T')[0]
       const promo = mockPromoData.find(
         p => p.promo_code.toUpperCase() === code.toUpperCase() && p.valid_until >= today
