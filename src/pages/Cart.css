@@ -1,7 +1,7 @@
 .cart-page {
   padding: 16px;
-  padding-bottom: 100px;
-  min-height: calc(100vh - 60px);
+  /* Padding handled by .app container based on display mode */
+  min-height: calc(100vh - 140px); /* Account for header and navbar */
   animation: fadeInPage 0.3s ease;
 }
 
