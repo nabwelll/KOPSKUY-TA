@@ -289,5 +289,29 @@ export const promoApi = {
       console.log('Using mock promo data for item:', id)
       return mockPromoData.find(promo => promo.id === parseInt(id))
     }
+  },
+
+  // Validate promo code
+  async validatePromoCode(code) {
+    try {
+      const today = new Date().toISOString().split('T')[0]
+      const { data, error } = await supabase
+        .from('promos')
+        .select('*')
+        .eq('promo_code', code.toUpperCase())
+        .gte('valid_until', today)
+        .single()
+      
+      if (error) throw error
+      return data
+    } catch (err) {
+      // Fallback to mock data for validation
+      console.log('Using mock promo data for validation:', code, err)
+      const today = new Date().toISOString().split('T')[0]
+      const promo = mockPromoData.find(
+        p => p.promo_code.toUpperCase() === code.toUpperCase() && p.valid_until >= today
+      )
+      return promo || null
+    }
   }
 }
