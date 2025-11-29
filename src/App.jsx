@@ -7,12 +7,15 @@ import Promo from './pages/Promo'
 import PromoDetail from './pages/PromoDetail'
 import About from './pages/About'
 import Cart from './pages/Cart'
+import useDisplayMode from './hooks/useDisplayMode'
 import './App.css'
 
 function App() {
+  const { isStandalone, displayMode } = useDisplayMode()
+
   return (
     <BrowserRouter>
-      <div className="app">
+      <div className={`app ${isStandalone ? 'standalone-mode' : 'browser-mode'}`} data-display-mode={displayMode}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/menu" element={<Menu />} />
