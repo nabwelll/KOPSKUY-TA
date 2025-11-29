@@ -3,38 +3,3 @@
   display: flex;
   flex-direction: column;
 }
-
-/* Browser mode: navbar at top, add padding-top to content */
-.app.browser-mode {
-  padding-top: 60px; /* Height of navbar in browser mode */
-}
-
-/* Standalone mode: navbar at bottom, add padding-bottom to content */
-.app.standalone-mode {
-  padding-bottom: 70px; /* Height of navbar in standalone mode */
-}
-
-/* Media query for safe area insets */
-@supports (padding: max(0px)) {
-  .app.browser-mode {
-    padding-top: max(60px, calc(60px + env(safe-area-inset-top)));
-  }
-  
-  .app.standalone-mode {
-    padding-bottom: max(70px, calc(70px + env(safe-area-inset-bottom)));
-  }
-}
-
-/* CSS media query fallback for standalone mode */
-@media (display-mode: standalone) {
-  .app {
-    padding-top: 0;
-    padding-bottom: 70px;
-  }
-  
-  @supports (padding: max(0px)) {
-    .app {
-      padding-bottom: max(70px, calc(70px + env(safe-area-inset-bottom)));
-    }
-  }
-}

@@ -1,5 +1,5 @@
 .detail-page {
-  /* Padding handled by .app container based on display mode */
+  padding-bottom: 100px;
   animation: fadeInPage 0.4s ease;
 }
 
