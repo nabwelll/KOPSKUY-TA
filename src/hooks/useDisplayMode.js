@@ -8,18 +8,27 @@ const useDisplayMode = () => {
   const [isStandalone, setIsStandalone] = useState(false)
 
   useEffect(() => {
+    // Guard for SSR - check if window is available
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    // Create MediaQueryList objects once to avoid duplication
+    const standaloneMediaQuery = window.matchMedia('(display-mode: standalone)')
+    const fullscreenMediaQuery = window.matchMedia('(display-mode: fullscreen)')
+
     // Check for standalone mode using multiple methods
     const checkStandaloneMode = () => {
       // Method 1: Check CSS media query for standalone display mode
-      const standaloneMediaQuery = window.matchMedia('(display-mode: standalone)')
+      const standaloneMatch = standaloneMediaQuery.matches
       
       // Method 2: Check for iOS standalone mode (Safari PWA)
       const isIOSStandalone = window.navigator.standalone === true
       
       // Method 3: Check for fullscreen display mode (alternative PWA mode)
-      const fullscreenMediaQuery = window.matchMedia('(display-mode: fullscreen)')
+      const fullscreenMatch = fullscreenMediaQuery.matches
       
-      const standalone = standaloneMediaQuery.matches || isIOSStandalone || fullscreenMediaQuery.matches
+      const standalone = standaloneMatch || isIOSStandalone || fullscreenMatch
       setIsStandalone(standalone)
     }
 
@@ -27,17 +36,14 @@ const useDisplayMode = () => {
     checkStandaloneMode()
 
     // Listen for display mode changes (in case of dynamic changes)
-    const standaloneQuery = window.matchMedia('(display-mode: standalone)')
-    const fullscreenQuery = window.matchMedia('(display-mode: fullscreen)')
-    
     const handleChange = () => checkStandaloneMode()
     
-    standaloneQuery.addEventListener('change', handleChange)
-    fullscreenQuery.addEventListener('change', handleChange)
+    standaloneMediaQuery.addEventListener('change', handleChange)
+    fullscreenMediaQuery.addEventListener('change', handleChange)
 
     return () => {
-      standaloneQuery.removeEventListener('change', handleChange)
-      fullscreenQuery.removeEventListener('change', handleChange)
+      standaloneMediaQuery.removeEventListener('change', handleChange)
+      fullscreenMediaQuery.removeEventListener('change', handleChange)
     }
   }, [])
 
