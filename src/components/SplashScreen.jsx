@@ -1,21 +1,25 @@
 import { useState, useEffect } from 'react'
 import { FiCoffee } from 'react-icons/fi'
-import logo from '../assets/images/logo.png'
+import defaultLogo from '../assets/images/logo.png'
 import './SplashScreen.css'
 
-const SplashScreen = ({ onComplete }) => {
+// Timing constants for splash screen animations (in milliseconds)
+const SPLASH_DISPLAY_DURATION = 2000
+const FADE_OUT_DURATION = 500
+
+const SplashScreen = ({ onComplete, logo = defaultLogo }) => {
   const [fadeOut, setFadeOut] = useState(false)
 
   useEffect(() => {
-    // Start fade out animation after 2 seconds
+    // Start fade out animation after display duration
     const fadeTimer = setTimeout(() => {
       setFadeOut(true)
-    }, 2000)
+    }, SPLASH_DISPLAY_DURATION)
 
-    // Complete splash screen after fade out animation (2.5s total)
+    // Complete splash screen after fade out animation
     const completeTimer = setTimeout(() => {
       onComplete()
-    }, 2500)
+    }, SPLASH_DISPLAY_DURATION + FADE_OUT_DURATION)
 
     return () => {
       clearTimeout(fadeTimer)
