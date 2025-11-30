@@ -83,3 +83,10 @@
     transform: scale(1);
   }
 }
+
+/* Hide BottomNav di Desktop */
+@media (min-width: 768px) {
+  .bottom-nav {
+    display: none;
+  }
+}

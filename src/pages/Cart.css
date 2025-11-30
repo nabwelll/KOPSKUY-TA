@@ -525,6 +525,10 @@
   box-shadow: 0 6px 20px rgba(107, 68, 35, 0.4);
 }
 
+.checkout-wrapper {
+  display: contents;
+}
+
 /* Confirmation */
 .confirmation-container {
   display: flex;
@@ -603,5 +607,37 @@
 
   .checkout-btn:hover {
     transform: translateX(-50%) translateY(-2px);
+  }
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .cart-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    padding-bottom: 24px;
+  }
+
+  .checkout-wrapper {
+    display: block;
+    width: 100%;
+    margin-top: 24px;
+  }
+
+  .checkout-btn {
+    position: static;
+    max-width: 100%;
+    width: 100%;
+    padding: 18px 32px;
+    transform: none;
+  }
+  
+  .checkout-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .cart-item {
+    padding: 20px;
   }
 }

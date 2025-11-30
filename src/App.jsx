@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import BottomNav from './components/BottomNav'
+import TopNavbar from './components/TopNavbar'
 import Home from './pages/Home'
 import Menu from './pages/Menu'
 import MenuDetail from './pages/MenuDetail'
@@ -13,6 +14,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="app">
+        <TopNavbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/menu" element={<Menu />} />

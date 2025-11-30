@@ -1,3 +1,4 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { FiHome, FiCoffee, FiTag, FiUser, FiShoppingCart } from 'react-icons/fi'

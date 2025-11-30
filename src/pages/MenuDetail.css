@@ -199,6 +199,10 @@
 }
 
 /* Add to Cart Button */
+.add-to-cart-wrapper {
+  display: contents;
+}
+
 .add-to-cart-btn {
   position: fixed;
   bottom: 80px;
@@ -258,10 +262,16 @@
 }
 
 @media (min-width: 768px) {
+  .detail-page {
+    padding-bottom: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
   .detail-hero {
     display: flex;
     gap: 24px;
-    padding: 24px;
   }
 
   .detail-image-wrapper {
@@ -271,6 +281,29 @@
   }
 
   .detail-card {
-    margin-top: 0;
+    margin: 24px 0;
+  }
+
+  .add-to-cart-wrapper {
+    display: block;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .add-to-cart-btn {
+    position: static;
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+    padding: 18px 32px;
+    transform: none;
+  }
+  
+  .add-to-cart-btn:hover {
+    transform: translateY(-2px);
+  }
+  
+  .add-to-cart-btn:active {
+    transform: translateY(0);
   }
 }

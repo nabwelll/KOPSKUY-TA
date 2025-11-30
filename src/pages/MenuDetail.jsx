@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { FiStar, FiCoffee, FiShoppingCart, FiCheck } from 'react-icons/fi'
 import { menuApi } from '../lib/supabase'
-import Header from '../components/Header'
 import { addToCart, formatPrice } from '../utils/cartUtils'
 import './MenuDetail.css'
 
@@ -48,81 +47,74 @@ const MenuDetail = () => {
 
   if (loading) {
     return (
-      <>
-        <Header title="Detail Menu" showBack />
-        <main className="detail-page">
-          <div className="loading">
-            <div className="loading-spinner"></div>
-          </div>
-        </main>
-      </>
+      <main className="detail-page">
+        <div className="loading">
+          <div className="loading-spinner"></div>
+        </div>
+      </main>
     )
   }
 
   if (error || !menuItem) {
     return (
-      <>
-        <Header title="Detail Menu" showBack />
-        <main className="detail-page">
-          <div className="error-message">{error || 'Menu tidak ditemukan'}</div>
-        </main>
-      </>
+      <main className="detail-page">
+        <div className="error-message">{error || 'Menu tidak ditemukan'}</div>
+      </main>
     )
   }
 
   return (
-    <>
-      <Header title="Detail Menu" showBack />
-      <main className="detail-page">
-        <div className="detail-hero">
-          <div className="detail-image-wrapper">
-            <img
-              src={menuItem.image_url || 'https://placehold.co/600x400/6B4423/FDF6E3?text=Kopi'}
-              alt={menuItem.name}
-              className="detail-image"
-              loading="lazy"
-            />
-            <div className="detail-image-overlay"></div>
-          </div>
-          {menuItem.is_popular && (
-            <span className="detail-badge popular">
-              <FiStar /> Menu Populer
-            </span>
-          )}
-          <span className="detail-category-badge">
-            <FiCoffee /> {menuItem.category}
+    <main className="detail-page">
+      <div className="detail-hero">
+        <div className="detail-image-wrapper">
+          <img
+            src={menuItem.image_url || 'https://placehold.co/600x400/6B4423/FDF6E3?text=Kopi'}
+            alt={menuItem.name}
+            className="detail-image"
+            loading="lazy"
+          />
+          <div className="detail-image-overlay"></div>
+        </div>
+        {menuItem.is_popular && (
+          <span className="detail-badge popular">
+            <FiStar /> Menu Populer
           </span>
+        )}
+        <span className="detail-category-badge">
+          <FiCoffee /> {menuItem.category}
+        </span>
+      </div>
+
+      <div className="detail-card">
+        <div className="detail-header">
+          <h1 className="detail-title">{menuItem.name}</h1>
+          <p className="detail-price">{formatPrice(menuItem.price)}</p>
+        </div>
+        
+        <div className="detail-divider"></div>
+        
+        <div className="detail-section">
+          <h2 className="detail-section-title">Deskripsi</h2>
+          <p className="detail-description">{menuItem.description}</p>
         </div>
 
-        <div className="detail-card">
-          <div className="detail-header">
-            <h1 className="detail-title">{menuItem.name}</h1>
-            <p className="detail-price">{formatPrice(menuItem.price)}</p>
-          </div>
-          
-          <div className="detail-divider"></div>
-          
+        {menuItem.ingredients && (
           <div className="detail-section">
-            <h2 className="detail-section-title">Deskripsi</h2>
-            <p className="detail-description">{menuItem.description}</p>
+            <h2 className="detail-section-title">Bahan-bahan</h2>
+            <p className="detail-description">{menuItem.ingredients}</p>
           </div>
+        )}
 
-          {menuItem.ingredients && (
-            <div className="detail-section">
-              <h2 className="detail-section-title">Bahan-bahan</h2>
-              <p className="detail-description">{menuItem.ingredients}</p>
-            </div>
-          )}
+        {menuItem.notes && (
+          <div className="detail-section">
+            <h2 className="detail-section-title">Catatan</h2>
+            <p className="detail-description">{menuItem.notes}</p>
+          </div>
+        )}
+      </div>
 
-          {menuItem.notes && (
-            <div className="detail-section">
-              <h2 className="detail-section-title">Catatan</h2>
-              <p className="detail-description">{menuItem.notes}</p>
-            </div>
-          )}
-        </div>
-
-        {/* Add to Cart Button */}
+      {/* Add to Cart Button */}
+      <div className="add-to-cart-wrapper">
         <button 
           className={`add-to-cart-btn ${addedToCart ? 'added' : ''}`}
           onClick={handleAddToCart}
@@ -140,8 +132,8 @@ const MenuDetail = () => {
             </>
           )}
         </button>
-      </main>
-    </>
+      </div>
+    </main>
   )
 }
 
