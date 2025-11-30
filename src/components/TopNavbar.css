@@ -15,6 +15,7 @@
   align-items: center;
   justify-content: space-between;
   height: 70px;
+  gap: 2rem;
 }
 
 .top-navbar-brand {
@@ -39,6 +40,7 @@
 .top-navbar-menu {
   display: flex;
   gap: 0.5rem;
+  margin-left: auto;
 }
 
 .top-navbar-link {
@@ -107,12 +109,24 @@
 }
 
 @media (max-width: 768px) {
+  .top-navbar-container {
+    gap: 1rem;
+  }
+
+  .top-navbar-brand span {
+    font-size: 1rem;
+  }
+
   .top-navbar-link span {
     display: none;
   }
   
   .top-navbar-link {
     padding: 0.5rem;
+  }
+
+  .top-navbar-menu {
+    gap: 0.25rem;
   }
 }
 
