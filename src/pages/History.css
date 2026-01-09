@@ -1,0 +1,255 @@
+.history-page {
+  padding: 1rem;
+  min-height: calc(100vh - 120px);
+}
+
+.history-header {
+  margin-bottom: 1.5rem;
+}
+
+.history-header h1 {
+  font-size: 1.75rem;
+  color: var(--text-primary);
+}
+
+/* Empty State */
+.empty-history {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.empty-history-icon {
+  font-size: 5rem;
+  color: var(--text-tertiary);
+  margin-bottom: 1rem;
+}
+
+.empty-history h2 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.empty-history p {
+  color: var(--text-secondary);
+}
+
+/* Orders List */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.order-card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.order-id {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-processing {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.order-card-date {
+  color: var(--text-tertiary);
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.order-card-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.order-card-items span {
+  background: var(--bg-secondary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.more-items {
+  font-weight: 600;
+  color: var(--primary-color) !important;
+}
+
+.order-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.order-total {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.order-total span {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.order-total strong {
+  font-size: 1.125rem;
+  color: var(--primary-color);
+}
+
+.chevron-icon {
+  color: var(--text-tertiary);
+  font-size: 1.25rem;
+}
+
+/* Order Detail */
+.order-detail {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+}
+
+.order-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.order-detail-header h2 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.order-detail-info {
+  background: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.order-detail-info p {
+  margin: 0.5rem 0;
+  color: var(--text-secondary);
+}
+
+.order-detail-items {
+  margin-bottom: 1.5rem;
+}
+
+.order-detail-items h3 {
+  font-size: 1.125rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.order-detail-item {
+  display: flex;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.order-detail-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.order-detail-item-info {
+  flex: 1;
+}
+
+.order-detail-item-info h4 {
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.order-detail-item-info p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.order-detail-item-total {
+  font-weight: 600;
+  color: var(--text-primary);
+  align-self: center;
+}
+
+.order-detail-summary {
+  background: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.order-detail-summary .summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.order-detail-summary .summary-row.discount {
+  color: #d9534f;
+}
+
+.order-detail-summary .summary-row.total {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color);
+}

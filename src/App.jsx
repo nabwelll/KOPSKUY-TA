@@ -8,6 +8,7 @@ import Promo from './pages/Promo'
 import PromoDetail from './pages/PromoDetail'
 import About from './pages/About'
 import Cart from './pages/Cart'
+import RedisDemoPage from './components/RedisDemoPage'; // tambahkan import
 import './App.css'
 
 function App() {
@@ -23,6 +24,8 @@ function App() {
           <Route path="/promo/:id" element={<PromoDetail />} />
           <Route path="/about" element={<About />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/redis-demo" element={<RedisDemoPage />} />
+
         </Routes>
         <BottomNav />
       </div>
