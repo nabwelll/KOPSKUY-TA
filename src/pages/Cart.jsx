@@ -12,6 +12,7 @@ const Cart = () => {
   const [loading, setLoading] = useState(true)
   const [checkoutLoading, setCheckoutLoading] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
+  const [showQRIS, setShowQRIS] = useState(false)
   const [paymentMethod, setPaymentMethod] = useState('')
   const [customerInfo, setCustomerInfo] = useState({
     name: '',
@@ -127,6 +128,16 @@ const Cart = () => {
   const handleCheckout = async () => {
     if (!validateForm()) return
     
+    if (paymentMethod === 'qris') {
+      setShowQRIS(true)
+      return
+    }
+
+    processCheckout()
+  }
+
+  const processCheckout = async () => {
+    setShowQRIS(false)
     setCheckoutLoading(true)
     // Simulate checkout process
     await new Promise(resolve => setTimeout(resolve, 2000))
@@ -370,6 +381,23 @@ const Cart = () => {
               Checkout - {formatPrice(getFinalTotal())}
             </button>
           </div>
+
+          {/* QRIS Modal */}
+          {showQRIS && (
+            <div className="qris-modal-overlay">
+              <div className="qris-modal">
+                <h2>Pembayaran QRIS</h2>
+                <p>Silakan scan QR Code di bawah ini untuk menyelesaikan pembayaran sebesar <strong>{formatPrice(getFinalTotal())}</strong></p>
+                <div className="qris-image-container">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" alt="Dummy QRIS" className="qris-image" />
+                </div>
+                <div className="qris-modal-actions">
+                  <button className="btn-secondary" onClick={() => setShowQRIS(false)}>Batal</button>
+                  <button className="btn-primary" onClick={processCheckout}>Saya Sudah Bayar</button>
+                </div>
+              </div>
+            </div>
+          )}
         </>
       )}
     </main>
